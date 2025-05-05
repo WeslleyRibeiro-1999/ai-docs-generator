@@ -8,6 +8,7 @@ openai = "*"
 langchain = "*"
 langchain-openai = "*"
 dotenv = "*"
+notion-client = "*"
 
 [dev-packages]
 
