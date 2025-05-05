@@ -1,58 +1,78 @@
-# Documentação do Sistema
+# 🌐 Visão Geral
 
-## Visão geral
-O sistema é responsável por gerenciar pedidos de compra, permitindo a criação, atualização, exclusão e consulta de pedidos. Além disso, também é possível buscar todos os pedidos de um determinado usuário.
+## O que o sistema faz
+O sistema de pedidos permite aos usuários realizar operações relacionadas a pedidos de compra, como criar, visualizar, atualizar e excluir pedidos. Além disso, possibilita a busca de pedidos por usuário e a listagem de todos os pedidos existentes.
 
-## Como o sistema funciona
-1. O usuário acessa a aplicação e interage através de requisições HTTP.
-2. As requisições são tratadas pelo sistema, que se comunica com o banco de dados para realizar as operações necessárias.
-3. O sistema retorna as respostas das requisições de acordo com as operações realizadas.
+## Por que ele existe e qual problema resolve
+O sistema foi criado para facilitar a gestão de pedidos de compra, tornando o processo mais organizado e eficiente. Com ele, é possível registrar e gerenciar pedidos de forma prática, garantindo maior controle e agilidade nas operações comerciais.
 
-## Regras de negócio
-- **Criar Pedido**: Permite que um usuário crie um novo pedido de compra, informando a descrição do item, a quantidade e o preço.
-- **Atualizar Pedido**: Possibilita a atualização de um pedido existente, alterando a quantidade e/ou o preço do item.
-- **Excluir Pedido**: Permite a exclusão de um pedido específico.
-- **Consultar Pedido**: Permite a consulta de um pedido pelo seu ID.
-- **Consultar Pedidos por Usuário**: Permite buscar todos os pedidos de um usuário específico.
+# 🔄 Como Funciona
 
-## Casos de uso comuns
-- Um usuário cria um novo pedido de compra.
-- Um usuário atualiza a quantidade de um item em um pedido.
-- Um usuário exclui um pedido.
-- Um usuário consulta os detalhes de um pedido específico.
-- Um usuário visualiza todos os pedidos que realizou.
+## Fluxo Principal do Sistema
+1. O usuário acessa a aplicação.
+2. Realiza operações como criar, visualizar, atualizar ou excluir pedidos.
+3. Pode buscar pedidos por usuário ou listar todos os pedidos.
+4. As operações são realizadas no banco de dados, refletindo as mudanças na interface.
 
-## Termos e conceitos importantes
-- **Pedido**: Representa uma solicitação de compra de um item.
-- **Usuário**: Pessoa que interage com o sistema, criando, atualizando e consultando pedidos.
-- **Descrição do Item**: Informação sobre o que está sendo comprado.
-- **Quantidade**: Número de itens solicitados no pedido.
-- **Preço**: Valor unitário do item.
-
-## Dúvidas comuns ou comportamentos importantes
-- **Autenticação**: O sistema não contempla autenticação de usuários.
-- **Segurança**: Não há informações sobre medidas de segurança adicionais implementadas.
-
-## Diagrama de Fluxo (ASCII)
-
+## Diagrama de Fluxo
 ```
-+------------------+       +-----------------+       +-------------------+
-|                  |       |                 |       |                   |
-|   Criar Pedido   +------->   Atualizar      +------->   Excluir Pedido   |
-|                  |       |     Pedido      |       |                   |
-+--------+---------+       +--------+--------+       +---------+---------+
-         |                        |                           |
-         |                        |                           |
-         |                        |                           |
-         |                        |                           |
-         |                        |                           |
-         |                        |                           |
-         |                        |                           |
-         |                        |                           |
-         |                        |                           |
-+--------v---------+       +--------v--------+       +---------v---------+
-|                  |       |                 |       |                   |
-| Consultar Pedido +-------> Consultar Pedidos+-------> Pedidos por Usuário|
-|                  |       |                 |       |                   |
-+------------------+       +-----------------+       +-------------------+
++-------------------+
+|   Início          |
+|                   |
+|   Criar Pedido     |
+|   Visualizar Pedido|
+|   Atualizar Pedido |
+|   Excluir Pedido   |
+|   Buscar Pedido    |
+|   Listar Pedidos   |
+|                   |
++-------------------+
 ```
+
+# 📋 Regras de Negócio
+
+## Principais Regras
+1. **Criar Pedido**
+   - **Descrição:** Permite criar um novo pedido de compra.
+   - **Exemplo:** O usuário adiciona um item ao carrinho e finaliza a compra.
+
+2. **Atualizar Pedido**
+   - **Descrição:** Permite modificar as informações de um pedido existente.
+   - **Exemplo:** O usuário altera a quantidade de um item no pedido.
+
+3. **Excluir Pedido**
+   - **Descrição:** Permite remover um pedido da lista.
+   - **Exemplo:** O usuário cancela um pedido antes do pagamento.
+
+# 📦 Casos de Uso Comuns
+
+## Situações de Uso
+- Um cliente deseja realizar uma nova compra.
+- Um vendedor precisa atualizar o status de um pedido.
+- Um gerente quer visualizar todos os pedidos de um determinado cliente.
+
+## Interação do Usuário
+- O usuário acessa a plataforma.
+- Cria um novo pedido.
+- Atualiza as informações do pedido.
+- Remove um pedido existente.
+
+# 📚 Termos e Conceitos Importantes
+
+## Termos
+- **Pedido:** Registro de uma solicitação de compra.
+- **Usuário:** Pessoa que utiliza o sistema para realizar operações.
+- **Atualização:** Modificação de informações em um pedido.
+
+# ❓ Perguntas Frequentes e Comportamentos Importantes
+
+## Dúvidas Comuns
+- Como criar um novo pedido?
+- É possível cancelar um pedido já realizado?
+- O sistema envia notificações sobre o status dos pedidos?
+
+## Pontos de Atenção
+- Verifique sempre os dados antes de finalizar um pedido.
+- Mantenha suas informações de contato atualizadas para receber notificações.
+
+Espero que essa documentação seja útil para compreender o funcionamento e as regras do sistema de pedidos! Se precisar de mais informações, estou à disposição.
