@@ -11,6 +11,7 @@ class Settings:
     TEMPERATURE = float(os.getenv("TEMPERATURE"))
     PROJECT_PATH = os.getenv("PROJECT_PATH")
     README_PATH = os.getenv("README_PATH")
+    # MAX_TOKENS = int(os.getenv("MAX_TOKENS"))
 
 
 settings = Settings()

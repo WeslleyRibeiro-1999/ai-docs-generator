@@ -1,83 +1,76 @@
-# Documentação Técnica - Projeto Autenticação
+# Documentação Técnica
 
 ## Resumo Técnico do Serviço
-O projeto Autenticação é uma aplicação desenvolvida em Python utilizando o framework FastAPI para fornecer endpoints de autenticação e gerenciamento de usuários. A aplicação utiliza SQLAlchemy para interagir com um banco de dados MySQL, implementando funcionalidades como cadastro de usuários, autenticação, criação de tokens de acesso, entre outras.
+O projeto consiste em uma aplicação que gerencia pedidos e usuários, permitindo a criação, atualização, exclusão e consulta de pedidos e usuários. Utiliza a linguagem de programação Go (Golang) e o framework Echo para construção de APIs.
 
-## Estrutura do Projeto e Descrição dos Principais Módulos, Classes e Funções
-### Módulos Principais
-- **core**: Contém configurações gerais e funcionalidades centrais da aplicação.
-- **models**: Define os modelos de dados utilizados pela aplicação.
-- **schemas**: Define os schemas de dados utilizados para validação e serialização.
-- **api**: Contém os endpoints da API RESTful.
-- **ai_service**: Módulo responsável por interagir com a API do OpenAI para geração de documentação.
+## Estrutura do Projeto
+### Principais Módulos
+- `api`: Contém os handlers para as requisições HTTP.
+- `database`: Responsável pela conexão e migração do banco de dados.
+- `models`: Define as estruturas de dados dos usuários e pedidos.
+- `order`: Lida com a lógica de busca de pedidos por usuário.
+- `repository`: Implementa a interface para operações no banco de dados.
+- `user`: Gerencia as operações relacionadas aos usuários.
 
 ### Principais Classes e Funções
-- **UsuarioModel**: Representa a entidade de usuário com atributos como nome, sobrenome, email, senha, entre outros.
-- **ArtigoModel**: Representa a entidade de artigo com atributos como título, URL da fonte, e relação com o criador.
-- **auth.py**: Contém funções relacionadas à autenticação de usuários.
-- **database.py**: Configura a conexão com o banco de dados.
-- **deps.py**: Define dependências utilizadas nos endpoints da API.
-- **main.py**: Ponto de entrada da aplicação, inicializa o servidor FastAPI.
+- `main.go`: Arquivo principal que inicializa o servidor e define as rotas.
+- `repository.go`: Implementação das operações CRUD no banco de dados.
+- `http.go`: Handlers para as requisições HTTP.
+- `database.go`: Configuração e migração do banco de dados.
 
 ## Tecnologias/Frameworks Utilizados
-- Python
-- FastAPI
-- SQLAlchemy
-- Pydantic
-- JWT
-- Passlib
-- OpenAI
+- Linguagem Go (Golang)
+- Framework Echo
+- GORM (Object-Relational Mapping para Go)
+- Testify (Framework de testes para Go)
 
-## Entradas e Saídas dos Principais Endpoints ou Funções
-### Endpoints da API
-- **POST /usuario/signup**: Cria um novo usuário com os dados fornecidos.
-- **GET /usuario**: Retorna a lista de usuários cadastrados.
-- **PUT /usuario/{usuario_id}**: Atualiza os dados de um usuário específico.
-- **DELETE /usuario/{usuario_id}**: Remove um usuário do sistema.
-- **POST /usuario/login**: Realiza a autenticação de um usuário e retorna um token de acesso.
+## Entradas e Saídas
+### Endpoints Principais
+- `POST /user`: Cria um novo usuário.
+- `GET /user/:id`: Retorna um usuário específico.
+- `GET /users`: Retorna todos os usuários.
+- `PUT /user/update`: Atualiza um usuário.
+- `DELETE /user`: Deleta um usuário.
+- `POST /order`: Cria um novo pedido.
+- `GET /order/:id`: Retorna um pedido específico.
+- `GET /orders/user/:id`: Retorna todos os pedidos de um usuário.
+- `GET /orders`: Retorna todos os pedidos.
+- `PATCH /order`: Atualiza um pedido.
+- `DELETE /order`: Deleta um pedido.
 
 ## Padrões de Projeto Identificados
-- Utilização do padrão de projeto Repository para interação com o banco de dados.
-- Utilização do padrão de projeto Dependency Injection para gerenciar dependências nos endpoints da API.
+- O projeto segue o padrão arquitetural Model-View-Controller (MVC), onde as responsabilidades estão bem distribuídas entre os módulos.
+- Utilização do padrão Repository para abstrair as operações no banco de dados.
 
 ## Instruções de Instalação e Execução
-1. Clone o repositório do projeto.
-2. Instale as dependências utilizando `pip install -r requirements.txt`.
-3. Configure as variáveis de ambiente no arquivo `.env`.
-4. Execute o arquivo `main.py` para iniciar o servidor FastAPI.
+1. Clone o repositório.
+2. Instale as dependências com `go mod tidy`.
+3. Execute a aplicação com `go run cmd/main.go`.
 
 ## Exemplos de Uso
-### Criação de Usuário
-```python
-import requests
+```bash
+# Criar um novo usuário
+curl -X POST http://localhost:8080/user -d '{"name": "João", "cpf": "12345678900", "email": "joao@gmail.com", "phone_number": "123456", "password": "teste123"}'
 
-url = 'http://localhost:8000/usuario/signup'
-data = {
-    'nome': 'João',
-    'sobrenome': 'Silva',
-    'email': 'joao@example.com',
-    'senha': 'senha123'
-}
-
-response = requests.post(url, json=data)
-print(response.json())
+# Obter todos os usuários
+curl http://localhost:8080/users
 ```
 
-## Diagrama de Fluxo ASCII
+## Diagrama de Fluxo (ASCII)
 ```
-Entrada -> POST /usuario/signup -> Processamento -> Criação de Usuário no Banco de Dados -> Saída
+Entrada: Requisição HTTP
+         |
+Processamento: Handlers -> Repository -> Banco de Dados
+         |
+Saída: Resposta HTTP
 ```
 
-## Sugestões de Melhoria de Código ou Arquitetura
-- Implementar testes automatizados para garantir a qualidade do código.
-- Refatorar as funções assíncronas para melhorar a legibilidade e manutenibilidade do código.
-- Adicionar documentação detalhada nos métodos e classes para facilitar a compreensão.
+## Sugestões de Melhoria
+- Implementar autenticação e autorização para proteger os endpoints sensíveis.
+- Adicionar mais testes unitários e de integração para aumentar a cobertura de testes.
+- Melhorar o tratamento de erros e mensagens de retorno para as requisições.
 
-## Orientações para Contribuição e Possíveis Pontos de Falha Técnica
-- Para contribuir, abra uma issue descrevendo a melhoria ou correção desejada.
-- Antes de enviar um pull request, certifique-se de seguir as diretrizes de contribuição do projeto.
-- Possíveis pontos de falha técnica podem incluir vulnerabilidades de segurança na autenticação, falta de tratamento de erros adequado, entre outros.
-
----
-
-Esta documentação fornece uma visão geral do projeto Autenticação, suas funcionalidades, estrutura, tecnologias utilizadas e sugestões de melhoria. Em caso de dúvidas ou sugestões, entre em contato com a equipe de desenvolvimento.
+## Contribuições e Pontos de Atenção
+- Ao contribuir, siga as convenções de código do projeto.
+- Evite expor informações sensíveis no código, como senhas.
+- Certifique-se de documentar adequadamente novas funcionalidades e alterações.

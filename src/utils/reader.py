@@ -6,7 +6,7 @@ def read_code_from_directory(directory_path: str) -> list:
 
     for root, _, files in os.walk(directory_path):
         for file in files:
-            if file.endswith(".py"):
+            if file.endswith(".go") or file.endswith(".py"):
                 file_path = os.path.join(root, file)
                 try:
                     with open(file_path, encoding="utf-8") as f:

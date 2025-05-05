@@ -1,37 +1,58 @@
-# Documentação de Regras de Negócio - Sistema de Autenticação
+# Documentação do Sistema
 
-## Visão Geral
-O sistema de autenticação foi desenvolvido para garantir a segurança e controle de acesso a uma aplicação. Ele permite que usuários se cadastrem, façam login e acessem recursos de forma segura. O sistema existe para proteger informações confidenciais e garantir que apenas usuários autorizados tenham acesso.
+## Visão geral
+O sistema é responsável por gerenciar pedidos de compra, permitindo a criação, atualização, exclusão e consulta de pedidos. Além disso, também é possível buscar todos os pedidos de um determinado usuário.
 
-## Como o Sistema Funciona
-1. **Cadastro de Usuários:** Os usuários podem se cadastrar fornecendo nome, sobrenome, e-mail e senha.
-2. **Login:** Após o cadastro, os usuários podem fazer login com seu e-mail e senha para acessar a aplicação.
-3. **Geração de Token de Acesso:** Após o login bem-sucedido, é gerado um token de acesso que é utilizado para autenticar o usuário em cada requisição subsequente.
+## Como o sistema funciona
+1. O usuário acessa a aplicação e interage através de requisições HTTP.
+2. As requisições são tratadas pelo sistema, que se comunica com o banco de dados para realizar as operações necessárias.
+3. O sistema retorna as respostas das requisições de acordo com as operações realizadas.
 
-## Regras de Negócio
-1. **Autenticação de Usuários:**
-    - O sistema verifica se o e-mail e a senha fornecidos estão corretos para autenticar o usuário.
-    - Se o usuário não existir ou a senha estiver incorreta, o acesso é negado.
-2. **Criação de Token de Acesso:**
-    - Após autenticar o usuário com sucesso, é gerado um token de acesso com validade para garantir a segurança das informações.
-3. **Cadastro de Artigos:**
-    - Usuários autenticados podem cadastrar artigos fornecendo título e URL da fonte.
+## Regras de negócio
+- **Criar Pedido**: Permite que um usuário crie um novo pedido de compra, informando a descrição do item, a quantidade e o preço.
+- **Atualizar Pedido**: Possibilita a atualização de um pedido existente, alterando a quantidade e/ou o preço do item.
+- **Excluir Pedido**: Permite a exclusão de um pedido específico.
+- **Consultar Pedido**: Permite a consulta de um pedido pelo seu ID.
+- **Consultar Pedidos por Usuário**: Permite buscar todos os pedidos de um usuário específico.
 
-## Casos de Uso Comuns
-1. **Cadastro de Novos Usuários:**
-    - Novos usuários se cadastram no sistema fornecendo informações pessoais.
-2. **Login e Acesso a Recursos:**
-    - Usuários autenticados fazem login para acessar recursos protegidos pela aplicação.
-3. **Criação de Artigos:**
-    - Usuários autenticados podem criar novos artigos para compartilhar informações.
+## Casos de uso comuns
+- Um usuário cria um novo pedido de compra.
+- Um usuário atualiza a quantidade de um item em um pedido.
+- Um usuário exclui um pedido.
+- Um usuário consulta os detalhes de um pedido específico.
+- Um usuário visualiza todos os pedidos que realizou.
 
-## Termos e Conceitos Importantes
-- **Token de Acesso:** É um código gerado após o login do usuário que é utilizado para autenticar as requisições subsequentes.
-- **Autenticação:** Processo de verificação da identidade do usuário para garantir acesso seguro.
-- **Hash de Senha:** Representação criptografada da senha do usuário para proteger suas informações.
+## Termos e conceitos importantes
+- **Pedido**: Representa uma solicitação de compra de um item.
+- **Usuário**: Pessoa que interage com o sistema, criando, atualizando e consultando pedidos.
+- **Descrição do Item**: Informação sobre o que está sendo comprado.
+- **Quantidade**: Número de itens solicitados no pedido.
+- **Preço**: Valor unitário do item.
 
-## Possíveis Dúvidas ou Comportamentos Importantes
-- **Recuperação de Senha:** Caso o usuário esqueça a senha, é necessário implementar um processo de recuperação seguro.
-- **Segurança dos Dados:** Garantir que as informações dos usuários sejam armazenadas de forma segura e protegida.
+## Dúvidas comuns ou comportamentos importantes
+- **Autenticação**: O sistema não contempla autenticação de usuários.
+- **Segurança**: Não há informações sobre medidas de segurança adicionais implementadas.
 
-Com essa documentação, é possível entender o funcionamento e as principais regras de negócio do sistema de autenticação de forma clara e acessível.
+## Diagrama de Fluxo (ASCII)
+
+```
++------------------+       +-----------------+       +-------------------+
+|                  |       |                 |       |                   |
+|   Criar Pedido   +------->   Atualizar      +------->   Excluir Pedido   |
+|                  |       |     Pedido      |       |                   |
++--------+---------+       +--------+--------+       +---------+---------+
+         |                        |                           |
+         |                        |                           |
+         |                        |                           |
+         |                        |                           |
+         |                        |                           |
+         |                        |                           |
+         |                        |                           |
+         |                        |                           |
+         |                        |                           |
++--------v---------+       +--------v--------+       +---------v---------+
+|                  |       |                 |       |                   |
+| Consultar Pedido +-------> Consultar Pedidos+-------> Pedidos por Usuário|
+|                  |       |                 |       |                   |
++------------------+       +-----------------+       +-------------------+
+```
