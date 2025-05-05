@@ -11,7 +11,10 @@ class Settings:
     TEMPERATURE = float(os.getenv("TEMPERATURE"))
     PROJECT_PATH = os.getenv("PROJECT_PATH")
     README_PATH = os.getenv("README_PATH")
-    # MAX_TOKENS = int(os.getenv("MAX_TOKENS"))
+    NOTION_TOKEN = os.getenv("NOTION_TOKEN")
+    NOTION_PAGE_ID = os.getenv("NOTION_PAGE_ID")
+    NOTION_API_URL = os.getenv("NOTION_API_URL")
+    NOTION_VERSION = os.getenv("NOTION_VERSION")
 
 
 settings = Settings()
